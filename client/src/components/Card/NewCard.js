@@ -15,7 +15,7 @@ class NewCard extends React.Component {
             <img alt='...' className='img-center img-fluid item-img-new' src={this.props.src} />
           </CardHeader>
           <CardFooter>
-            <p id='pet-info'>Pet Infomation</p>
+            <p id='pet-info'>Pet Information</p>
             <p>
               <span>Fund: </span>
               <span>{this.props.targetFund}</span>

@@ -1,4 +1,5 @@
 import getWeb3 from '../utils/getWeb3';
+import getWeb3Torus from '../utils/getWeb3Torus';
 import Factory from 'contracts/PetWalletFactory.json';
 import petWallet from 'contracts/PetWallet.json';
 
@@ -6,8 +7,8 @@ export const WEB3_CONNECT = 'WEB3_CONNECT';
 export const web3Connect = () => async (dispatch) => {
   const web3 = await getWeb3();
   const accounts = await web3.eth.getAccounts();
-  if (web3.currentProvider.networkVersion !== '89') {
-    alert('Unknown network, please change network to TomoChain testnet');
+  if (web3.currentProvider.networkVersion !== '3') {
+    alert('Unknown network, please change network to Ropsten testnet');
     return;
   }
   if (accounts.length > 0) {
@@ -27,36 +28,28 @@ export const web3Connect = () => async (dispatch) => {
   dispatch(getAllPets());
 };
 
-export const web3TomoWalletConnect = () => async (dispatch) => {
-  var Web3 = require('web3');
-  const web3 = new Web3(window.web3.currentProvider);
-  window.web3.version.getNetwork((e, netId) => {
-    if (netId !== '89') {
-      alert('Unknown network, please change network to TomoChain testnet');
-      return;
-    }
-  });
-  await new Promise((resolve, reject) => {
-    window.web3.eth.getAccounts(async (e, accounts) => {
-      if (accounts.length > 0) {
-        const account = accounts[0];
-        let balance = await web3.eth.getBalance(account);
-        balance = parseFloat(web3.utils.fromWei(balance)).toFixed(2);
-        dispatch({
-          type: WEB3_CONNECT,
-          web3,
-          account,
-          balance
-        });
-        dispatch(instantiateContracts());
-        dispatch(getAllPets());
-        resolve();
-      } else {
-        reject();
-        console.log('Account not found');
-      }
+export const web3TorusConnect = () => async (dispatch) => {
+  const web3 = await getWeb3Torus();
+  const accounts = await web3.eth.getAccounts();
+  if (web3.currentProvider.networkVersion !== '3') {
+    alert('Unknown network, please change network to Ropsten testnet');
+    return;
+  }
+  if (accounts.length > 0) {
+    const account = accounts[0];
+    let balance = await web3.eth.getBalance(account);
+    balance = parseFloat(web3.utils.fromWei(balance)).toFixed(2);
+    dispatch({
+      type: WEB3_CONNECT,
+      web3,
+      account,
+      balance
     });
-  });
+  } else {
+    console.log('Account not found');
+  }
+  dispatch(instantiateContracts());
+  dispatch(getAllPets());
 };
 
 export const INSTANTIATE_CONTRACT = 'INSTANTIATE_CONTRACT';
@@ -92,7 +85,7 @@ export const getAllPets = () => async (dispatch, getState) => {
       purpose: ''
     };
     pet.instance = new web3.eth.Contract(petWallet.abi, petArray[i]);
-    let petInfo = await pet.instance.methods.getInfomation().call();
+    let petInfo = await pet.instance.methods.getInformation().call();
     pet.id = petInfo[0];
     pet.amount = petInfo[1];
     pet.time = petInfo[2];

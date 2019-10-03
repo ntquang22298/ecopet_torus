@@ -47,11 +47,8 @@ class PetDetail extends Component {
 
   async componentDidMount() {
     if (!window.web3) return;
-    if (window.web3.currentProvider.isMetaMask) {
-      await store.dispatch(actions.web3Connect());
-    } else if (window.web3.currentProvider.isTomoWallet) {
-      await store.dispatch(actions.web3TomoWalletConnect());
-    }
+    await store.dispatch(actions.web3TorusConnect());
+
     // await store.dispatch(actions.instantiateContracts());
     await store.dispatch(actions.getAllPetsAddress());
     let PetInstance = new this.props.tomo.web3.eth.Contract(
@@ -74,7 +71,7 @@ class PetDetail extends Component {
 
   async getPetInfo() {
     let [type, providentFund, growthTime, targetFund, duration] = Object.values(
-      await this.state.petInstance.methods.getInfomation().call()
+      await this.state.petInstance.methods.getInformation().call()
     );
     this.setState({ type, providentFund, growthTime, targetFund, duration });
     this.getProgress();

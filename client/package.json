@@ -21,7 +21,8 @@
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "thunk": "^0.0.1",
-    "web3": "1.0.0-beta.36"
+    "web3": "1.0.0-beta.36",
+    "@toruslabs/torus-embed": "^0.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
