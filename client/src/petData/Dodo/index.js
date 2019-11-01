@@ -15,6 +15,10 @@ const Dodo = {
     {
       scale: 1,
       milestone: 50
+    },
+    {
+      scale: 1.25,
+      milestone: 75
     }
   ],
   progress: [

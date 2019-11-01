@@ -116,7 +116,7 @@ contract PetWallet {
   function checkIsFreezing() public returns (bool) {
     if(now.sub(lastTimeSavingMoney) > (3 days)) {
       isFreezing = true;
-    } 
+    }
 
     return isFreezing;
   }

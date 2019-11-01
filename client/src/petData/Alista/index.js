@@ -14,6 +14,10 @@ const Alista = {
     {
       scale: 1.5,
       milestone: 50
+    },
+    {
+      scale: 1.75,
+      milestone: 75
     }
   ],
   progress: [

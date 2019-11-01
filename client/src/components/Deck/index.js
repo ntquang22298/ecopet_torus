@@ -56,7 +56,7 @@ class PetDeck extends React.Component {
             <div className='avatar'>
               <img
                 alt='...'
-                src={'https://robohash.org/' + this.props.account + '.png?set=set4'}
+                src={'https://flathash.com/' + this.props.account + '.png?set=set4'}
                 width='40px'
                 height='40px'
                 className='account-avatar'
